@@ -1,0 +1,25 @@
+version: "3.7"
+services:
+  db:
+    image: postgres:12.1
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+{% if cookiecutter.celery_broker == "redis" -%}
+  redis:
+    image: 5.0
+    ports:
+      - 6379:6379
+    volumes:
+      - redis-data:/data
+{%- endif %}
+volumes:
+  db-data:
+{%- if cookiecutter.celery_broker == "redis" %}
+  redis-data:
+{% endif %}

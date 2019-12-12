@@ -1,0 +1,5 @@
+{
+    "project_name": "My Awesome Project",
+    "project_slug": "{{ cookiecutter.project_name|lower|replace(' ', '') }}",
+    "celery_broker": ["none", "redis"]
+}
